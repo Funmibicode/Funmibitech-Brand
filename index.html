@@ -5,301 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Funmibitech – Web Development & UI/UX Design</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black: #1e3a2f;
-      --white: #f8f7f3;
-      --accent: #7db87a;
-      --mid: #6b6b6b;
-      --light: #e2e8e4;
-      --card-bg: #f3f7f4;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--white);
-      color: var(--black);
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.4rem 6%;
-      background: rgba(245,244,240,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--light);
-    }
-    .logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.35rem;
-      letter-spacing: -0.02em;
-      color: var(--black);
-      text-decoration: none;
-    }
-    .logo span { color: var(--accent); }
-    nav ul { list-style: none; display: flex; gap: 2.4rem; }
-    nav ul a {
-      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--mid); text-decoration: none;
-      transition: color 0.2s;
-    }
-    nav ul a:hover { color: var(--black); }
-    .nav-cta {
-      background: var(--black); color: var(--white) !important;
-      padding: 0.55rem 1.3rem; border-radius: 2rem;
-      transition: background 0.2s !important;
-    }
-    .nav-cta:hover { background: var(--accent) !important; color: var(--black) !important; }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 10vh;
-      display: flex; align-items: center;
-      padding: 9rem 6% 5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-bg-text {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(8rem, 18vw, 22rem);
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(0, 0, 0, 0.23);
-      white-space: nowrap;
-      pointer-events: none;
-      user-select: none;
-      letter-spacing: -0.04em;
-    }
-    .hero-inner {
-      max-width: 1100px; width: 100%;
-      position: relative; z-index: 1;
-    }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 1.8rem;
-    }
-    .hero-tag::before {
-      content: ''; width: 28px; height: 1px; background: var(--accent);
-    }
-    h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(3rem, 6.5vw, 5.5rem);
-      line-height: 1.08; letter-spacing: -0.03em;
-      max-width: 780px;
-      margin-bottom: 1.8rem;
-    }
-    h1 em { font-style: italic; color: var(--accent); }
-    .hero-sub {
-      font-size: 1.05rem; color: var(--mid);
-      max-width: 480px; line-height: 1.75;
-      margin-bottom: 3rem;
-    }
-    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--black); color: var(--white);
-      padding: 0.9rem 2.2rem; border-radius: 2.5rem;
-      font-size: 0.9rem; font-weight: 500; text-decoration: none;
-      transition: background 0.25s, transform 0.2s;
-      display: inline-block;
-    }
-    .btn-primary:hover { background: var(--accent); color: var(--black); transform: translateY(-2px); }
-    .btn-ghost {
-      color: var(--black); font-size: 0.9rem; font-weight: 500;
-      text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
-      transition: gap 0.2s;
-    }
-    .btn-ghost:hover { gap: 0.85rem; }
-    .hero-stats {
-      margin-top: 5rem;
-      display: flex; gap: 3.5rem; flex-wrap: wrap;
-      border-top: 1px solid var(--light); padding-top: 2.5rem;
-    }
-    .stat-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2.4rem; line-height: 1;
-      letter-spacing: -0.03em;
-    }
-    .stat-label {
-      font-size: 0.78rem; color: var(--mid);
-      text-transform: uppercase; letter-spacing: 0.08em;
-      margin-top: 0.3rem;
-    }
-    .accent-dot { color: var(--accent); }
-
-    /* ── SERVICES ── */
-    .services {
-      padding: 7rem 6%;
-      background: var(--black);
-      color: var(--white);
-    }
-    .section-header {
-      display: flex; justify-content: space-between;
-      align-items: flex-end; margin-bottom: 4rem;
-      flex-wrap: wrap; gap: 1.5rem;
-    }
-    .section-label {
-      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 0.8rem;
-    }
-    .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: -0.03em; line-height: 1.15;
-    }
-    .section-sub { font-size: 0.9rem; color: #888; max-width: 300px; line-height: 1.7; }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5px;
-      background: var(--black);
-    }
-    .service-card {
-      background: var(--black);
-      padding: 2.8rem 2.4rem;
-      transition: background 0.3s;
-      cursor: default;
-    }
-    .service-card:hover { background: #151515; }
-    .service-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 0.85rem; color: var(--accent);
-      margin-bottom: 2rem;
-    }
-    .service-icon {
-      width: 42px; height: 42px;
-      border: 1px solid #333; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.5rem; font-size: 1.1rem;
-    }
-    .service-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.4rem; letter-spacing: -0.02em;
-      margin-bottom: 0.9rem; color: var(--white);
-    }
-    .service-desc { font-size: 0.88rem; color: #777; line-height: 1.75; }
-    .service-tags { margin-top: 1.8rem; display: flex; flex-wrap: wrap; gap: 0.45rem; }
-    .tag {
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em;
-      text-transform: uppercase; padding: 0.3rem 0.75rem;
-      border: 1px solid #2a2a2a; border-radius: 2rem;
-      color: #666;
-    }
-
-    /* ── PROCESS ── */
-    .process { padding: 7rem 6%; }
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem; margin-top: 4rem;
-    }
-    .step {
-      padding: 2rem 1.8rem;
-      border: 1px solid var(--light);
-      border-radius: 16px;
-      background: var(--card-bg);
-      transition: border-color 0.25s, transform 0.25s;
-    }
-    .step:hover { border-color: var(--accent); transform: translateY(-4px); }
-    .step-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2.5rem; color: var(--light);
-      letter-spacing: -0.04em; margin-bottom: 1.2rem;
-    }
-    .step-title {
-      font-weight: 600; font-size: 0.95rem;
-      margin-bottom: 0.6rem;
-    }
-    .step-desc { font-size: 0.85rem; color: var(--mid); line-height: 1.7; }
-
-    /* ── CTA BAND ── */
-    .cta-band {
-      margin: 0 6% 7rem;
-      background: var(--accent);
-      border-radius: 20px;
-      padding: 4.5rem 5%;
-      display: flex; justify-content: space-between;
-      align-items: center; gap: 2rem; flex-wrap: wrap;
-    }
-    .cta-band h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      letter-spacing: -0.03em; color: var(--black);
-      max-width: 520px; line-height: 1.2;
-    }
-    .btn-dark {
-      background: var(--black); color: var(--white);
-      padding: 1rem 2.4rem; border-radius: 2.5rem;
-      font-size: 0.9rem; font-weight: 500;
-      text-decoration: none; white-space: nowrap;
-      transition: transform 0.2s, opacity 0.2s;
-      display: inline-block;
-    }
-    .btn-dark:hover { transform: translateY(-2px); opacity: 0.88; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--black); color: #555;
-      padding: 3rem 6%;
-      display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 1rem;
-    }
-    .footer-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem; color: var(--white); text-decoration: none;
-    }
-    .footer-logo span { color: var(--accent); }
-    footer p { font-size: 0.8rem; }
-    .footer-links { display: flex; gap: 1.8rem; }
-    .footer-links a {
-      font-size: 0.8rem; color: #555; text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--accent); }
-
-    /* ── ANIMATIONS ── */
-    .fade-up {
-      opacity: 0; transform: translateY(28px);
-      animation: fadeUp 0.7s ease forwards;
-    }
-    .fade-up:nth-child(1) { animation-delay: 0.1s; }
-    .fade-up:nth-child(2) { animation-delay: 0.25s; }
-    .fade-up:nth-child(3) { animation-delay: 0.4s; }
-    .fade-up:nth-child(4) { animation-delay: 0.55s; }
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 640px) {
-      nav ul { display: none; }
-      .hero-stats { gap: 2rem; }
-      .cta-band { text-align: center; justify-content: center; }
-      .section-header { flex-direction: column; align-items: flex-start; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="logo">Funmibi<span>tech</span></a>
   <ul>
     <li><a href="#services">Services</a></li>
     <li><a href="#process">Process</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#templates">Templates</a></li>
     <li><a href="#contact" class="nav-cta">Hire Me</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- HERO -->
+<div class="nav-overlay" id="navOverlay"></div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services"  onclick="closeMenu()">Services</a>
+  <a href="#process"   onclick="closeMenu()">Process</a>
+  <a href="#projects"  onclick="closeMenu()">Projects</a>
+  <a href="#templates" onclick="closeMenu()">Templates</a>
+  <a href="#contact"   onclick="closeMenu()" class="mobile-cta">Hire Me</a>
+</div>
+
 <section class="hero">
   <div class="hero-bg-text">Build</div>
   <div class="hero-inner">
@@ -329,7 +62,6 @@
   </div>
 </section>
 
-<!-- SERVICES -->
 <section class="services" id="services">
   <div class="section-header">
     <div>
@@ -386,14 +118,13 @@
   </div>
 </section>
 
-<!-- PROCESS -->
 <section class="process" id="process">
   <div class="section-header">
     <div>
       <div class="section-label">How it works</div>
-      <h2 class="section-title" style="color: var(--black);">Simple, clear<br>process</h2>
+      <h2 class="section-title">Simple, clear<br>process</h2>
     </div>
-    <p class="section-sub" style="color: var(--mid);">No confusion, no delays. Just a smooth path from idea to live website.</p>
+    <p class="section-sub">No confusion, no delays. Just a smooth path from idea to live website.</p>
   </div>
   <div class="process-steps">
     <div class="step">
@@ -419,13 +150,133 @@
   </div>
 </section>
 
-<!-- CTA BAND -->
+<section class="projects-section" id="projects">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Recent Work</div>
+      <h2 class="section-title">A few projects<br>worth seeing</h2>
+    </div>
+    <p class="section-sub">Handpicked work built with real business goals in mind.</p>
+  </div>
+  <div class="projects-row">
+    <div class="proj-card">
+      <div class="proj-thumb proj-thumb-ecom">🛍️</div>
+      <div class="proj-body">
+        <div class="proj-type">E-Commerce</div>
+        <h3 class="proj-title">TruViewsFit Shoe Store</h3>
+        <p class="proj-desc">Responsive storefront with WhatsApp order integration and product filtering — built for a modern shoe brand.</p>
+        <a href="https://truviewsfit.netlify.app" target="_blank" class="proj-live">
+          <span class="proj-dot"></span> Live Site →
+        </a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-thumb proj-thumb-landing">✦</div>
+      <div class="proj-body">
+        <div class="proj-type">Landing Page</div>
+        <h3 class="proj-title">Prismly Landing Page</h3>
+        <p class="proj-desc">Conversion-focused landing page with scroll animations and a bold modern layout designed to drive engagement.</p>
+        <a href="https://prismly.netlify.app" target="_blank" class="proj-live">
+          <span class="proj-dot"></span> Live Site →
+        </a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-thumb proj-thumb-app">🔐</div>
+      <div class="proj-body">
+        <div class="proj-type">Web App</div>
+        <h3 class="proj-title">StealthKey Password Manager</h3>
+        <p class="proj-desc">Encrypted password vault built with Supabase and Web Crypto API — featuring Google OAuth and a hacker aesthetic.</p>
+        <a href="https://stealthykey.netlify.app" target="_blank" class="proj-live">
+          <span class="proj-dot"></span> Live Site →
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="projects-footer">
+    <a href="https://funmibitech.netlify.app/project.html" target="_blank" class="btn-all">View All Projects →</a>
+    <span class="projects-count">5 projects total</span>
+  </div>
+</section>
+
+<section class="templates-section" id="templates">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Ready-Made</div>
+      <h2 class="section-title">Buy a template,<br>launch today</h2>
+    </div>
+    <p class="section-sub">Professionally designed templates you can own and deploy — no developer needed.</p>
+  </div>
+
+  <div class="templates-grid">
+
+    <div class="tpl-card">
+      <div class="tpl-img">
+        <div class="tpl-img-placeholder">
+          <div class="tpl-wf tpl-wf-header"></div>
+          <div class="tpl-wf tpl-wf-hero"></div>
+          <div class="tpl-wf tpl-wf-row">
+            <div class="tpl-wf-col"></div>
+            <div class="tpl-wf-col"></div>
+            <div class="tpl-wf-col"></div>
+          </div>
+        </div>
+        <span class="tpl-badge-float">Wedding &amp; Events</span>
+        <span class="tpl-new-float">New</span>
+        <span class="tpl-img-label">Preview coming</span>
+      </div>
+      <div class="tpl-body">
+        <h3 class="tpl-name">Élite Wedding Template</h3>
+        <p class="tpl-short">A beautiful, elegant template designed for wedding planners and event coordinators — with a booking-ready layout.</p>
+        <div class="tpl-more" id="more-01">
+          <div class="tpl-specs-inner">
+            <div class="tpl-spec"><span class="tpl-spec-dot"></span>Fully responsive — looks great on any device</div>
+            <div class="tpl-spec"><span class="tpl-spec-dot"></span>Clean HTML, CSS &amp; JS — easy to customise</div>
+            <div class="tpl-spec"><span class="tpl-spec-dot"></span>WhatsApp enquiry integration included</div>
+            <div class="tpl-spec"><span class="tpl-spec-dot"></span>Gallery, services, and contact sections</div>
+            <div class="tpl-spec"><span class="tpl-spec-dot"></span>Typewriter hero animation &amp; soft aesthetics</div>
+          </div>
+        </div>
+        <button class="tpl-read-more" onclick="toggleMore(this,'more-01')" aria-expanded="false">
+          Read more <i class="rm-arrow">↓</i>
+        </button>
+        <div class="tpl-card-actions">
+          <a href="https://wa.me/2349069785714?text=Hi%20Funmibi!%20I%27d%20like%20to%20buy%20the%20Elite%20Wedding%20template." target="_blank" class="btn-buy-tpl">Buy Template →</a>
+          <a href="https://elite.eventsd.netlify.app" target="_blank" class="btn-demo">Live Demo ↗</a>
+        </div>
+        <p class="tpl-price-note">💬 Message to get the price and receive files via WhatsApp.</p>
+      </div>
+    </div>
+
+    <div class="tpl-card tpl-coming-soon">
+      <div class="tpl-img">
+        <div class="tpl-img-placeholder">
+          <div class="tpl-wf tpl-wf-header"></div>
+          <div class="tpl-wf tpl-wf-hero"></div>
+          <div class="tpl-wf tpl-wf-row">
+            <div class="tpl-wf-col"></div>
+            <div class="tpl-wf-col"></div>
+          </div>
+        </div>
+        <span class="tpl-img-label">Coming soon</span>
+      </div>
+      <div class="tpl-body">
+        <h3 class="tpl-name tpl-name-dim">More templates<br>on the way</h3>
+        <p class="tpl-short tpl-short-dim">New templates dropping soon — follow on Instagram or TikTok to be the first to know.</p>
+        <div class="tpl-card-actions tpl-actions-dim">
+          <a href="https://www.instagram.com/funmibitech" target="_blank" class="btn-demo btn-follow">Follow for updates ↗</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <div class="cta-band" id="contact">
   <h2>Ready to build your online presence? Let's talk.</h2>
-  <a href="https://wa.me/2349069785714?text=Hi%20Funmibi!%20I%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20discuss%20a%20project%20with%20you.">Get in Touch →</a>
+  <a href="https://wa.me/2349069785714?text=Hi%20Funmibi!%20I%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20discuss%20a%20project%20with%20you." class="btn-dark">Get in Touch →</a>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <a href="#" class="footer-logo">Funmibi<span>tech</span></a>
   <p>© 2026 Funmibitech. All rights reserved.</p>
@@ -435,5 +286,7 @@
     <a href="#">WhatsApp</a>
   </div>
 </footer>
+
+<script src="main.js"></script>
 </body>
 </html>
